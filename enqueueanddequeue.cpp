@@ -1,72 +1,38 @@
-// Enqueue and Dequeue operations in a Queue using an array
-
-// Time Complexity: O(n)
-
 #include <iostream>
 using namespace std;
 
-#define SIZE 2
+int front = 0;
+int rear = -1;
+const int maxsize = 2;
+int queue[maxsize];
 
-int A[SIZE];
-int front = -1, rear = -1;
-
-bool isEmpty()
-{
-    return (front == -1 && rear == -1);
-}
-
-void enqueue(int val)
-{
-    if (rear == SIZE - 1)
-    {
-        cout << "Queue is full" << endl;
-        return;
-    }
-
-    if (front == -1)
-    {
-        front = 0;
-    }
-
-    rear++;
-    A[rear] = val;
-    cout << "Enqueued Value : " << val << endl;
-}
-
-void dequeue()
-{
-    if (isEmpty())
-    {
-        cout << "Queue is empty" << endl;
-        return;
-    }
-
-    if (front == rear)
-    {
-        front = rear = -1;
-    }
-    else
-    {
-        if (front == rear)
-        {
-            front = rear = -1;
-        }
-        else
-        {
-            cout << "Dequeued Value : " << A[front] << endl;
-            front++;
-        }
+void enqueue(int val) {
+    if (rear >= maxsize - 1) {
+        cout << "Queue is Full\n";
+    } else {
+        rear++;
+        queue[rear] = val;
     }
 }
 
+void dequeue() {
+    if (front > rear) {
+        cout << "Queue is Empty\n";
+    } else {
+        int temp = queue[front];
+        front++;
+        cout << "Dequeued: " << temp << endl;
+    }
+}
 
-int main()
-{
-    dequeue();
+int main() {
+
     enqueue(2);
-    enqueue(4);
-    enqueue(6);
+    enqueue(3);
+
     dequeue();
+    dequeue();
+    dequeue(); // Queue is Empty
 
     return 0;
 }
